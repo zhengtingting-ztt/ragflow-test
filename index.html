@@ -55,7 +55,8 @@
         
         .iframe-wrapper {
             width: 100%;
-            height: 600px;
+            height: 80vh; /* 关键修改：使用视口高度 */
+            min-height: 700px; /* 最小高度保证 */
         }
         
         footer {
@@ -65,45 +66,9 @@
             font-size: 0.9rem;
         }
         
-        .instructions {
-            background-color: #f9fafb;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 800px;
-        }
-        
-        .instructions h2 {
-            color: #2563eb;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .instructions ul {
-            padding-left: 20px;
-        }
-        
-        .instructions li {
-            margin-bottom: 10px;
-        }
-        
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
             .iframe-wrapper {
-                height: 500px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.7rem;
-            }
-            
-            .iframe-wrapper {
-                height: 400px;
+                height: 70vh; /* 移动端高度调整 */
             }
         }
     </style>
@@ -115,24 +80,14 @@
             <p class="subtitle">此页面演示了如何将 RAGFlow 聊天助手嵌入到网站中</p>
         </header>
         
-        <div class="instructions">
-            <h2>使用说明</h2>
-            <ul>
-                <li>直接在下方聊天窗口提问，测试助手功能</li>
-                <li>此页面已响应式设计，可在手机、平板和电脑上使用</li>
-                <li>将此 HTML 文件保存后直接在浏览器打开即可使用</li>
-            </ul>
-        </div>
-        
         <div class="chat-container">
             <div class="iframe-wrapper">
-                <!-- 您提供的 iframe 代码 -->
                 <iframe
                     src="http://172.18.82.40/chat/share?shared_id=783773127c0211f08d8d6233cd83c456&from=chat&auth=llOGJiZDk2N2NlMDExZjBiYmMyNjIzM2"
                     style="width: 100%; height: 100%;"
                     frameborder="0"
-                >
-                </iframe>
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                ></iframe>
             </div>
         </div>
         
