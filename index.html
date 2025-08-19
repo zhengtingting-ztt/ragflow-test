@@ -3,118 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAGFlow 3333聊天助手测试</title>
+    <title>白山智问- 智能聊天助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
             min-height: 100vh;
             padding: 20px;
             display: flex;
             flex-direction: column;
-            height: 100vh; /* 关键修复：使body占据整个视口高度 */
+            align-items: center;
         }
         
         .container {
             max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
-            flex: 1; /* 关键修复：容器占据剩余空间 */
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
         
         header {
+            background: linear-gradient(to right, #2563eb, #3b82f6);
+            color: white;
+            padding: 25px 40px;
             text-align: center;
-            padding: 20px 0;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 15px;
         }
         
+        .logo i {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: #ffd700;
+        }
+        
         h1 {
-            font-size: 2rem;
-            color: #2563eb;
-            margin-bottom: 8px;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
         
         .subtitle {
-            font-size: 1rem;
-            color: #4b5563;
-            max-width: 600px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
             margin: 0 auto;
         }
         
-        .chat-container {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            flex: 1; /* 关键修复：聊天容器占据剩余空间 */
+        .features {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            width: 280px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #1e40af;
+        }
+        
+        .chat-container {
+            padding: 30px;
+            position: relative;
         }
         
         .iframe-wrapper {
-            flex: 1; /* 关键修复：iframe容器占据全部可用空间 */
-            width: 100%;
-            min-height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 650px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        footer {
-            text-align: center;
-            padding: 15px;
-            color: #6b7280;
-            font-size: 0.8rem;
-            margin-top: 15px;
-        }
-        
-        /* 关键修复：确保iframe自身高度100% */
-        iframe {
+        .iframe-wrapper iframe {
             width: 100%;
             height: 100%;
-            display: block;
             border: none;
         }
         
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            color: #3b82f6;
+        }
+        
+        .instructions {
+            background: #e0f2fe;
+            padding: 25px 40px;
+            border-radius: 15px;
+            margin: 30px;
+        }
+        
+        .instructions h2 {
+            color: #1e40af;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .instructions h2 i {
+            margin-right: 10px;
+        }
+        
+        .instructions ul {
+            list-style-type: none;
+        }
+        
+        .instructions li {
+            padding: 12px 0;
+            border-bottom: 1px dashed #93c5fd;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .instructions li:last-child {
+            border-bottom: none;
+        }
+        
+        .instructions li i {
+            color: #3b82f6;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            margin-top: 4px;
+        }
+        
+        footer {
+            background: linear-gradient(to right, #1e3a8a, #1e40af);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 1rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .contact {
+            text-align: left;
+        }
+        
+        .contact p {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact i {
+            margin-right: 10px;
+            color: #93c5fd;
+        }
+        
+        .copyright {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 900px) {
+            .features {
+                flex-direction: column;
+                align-items: center;
             }
             
+            .feature-card {
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .contact {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 600px) {
             h1 {
-                font-size: 1.5rem;
+                font-size: 2.2rem;
             }
             
             .subtitle {
-                font-size: 0.9rem;
+                font-size: 1rem;
+            }
+            
+            header {
+                padding: 20px;
+            }
+            
+            .chat-container {
+                padding: 15px;
+            }
+            
+            .iframe-wrapper {
+                height: 500px;
             }
         }
+        
+        /* Animation for header */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        header {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* Animation for feature cards */
+        .feature-card {
+            animation: fadeIn 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .feature-card:nth-child(1) { animation-delay: 0.2s; }
+        .feature-card:nth-child(2) { animation-delay: 0.4s; }
+        .feature-card:nth-child(3) { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>RAGFlow 聊天助手测试</h1>
-            <p class="subtitle">此页面演示了如何将 RAGFlow 聊天助手嵌入到网站中</p>
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>白山智问-智能聊天助手</h1>
+            </div>
+            <p class="subtitle">先进的人工智能技术，为您提供24/7的即时支持与专业解答</p>
         </header>
+        
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-lightbulb"></i>
+                <h3>智能问答</h3>
+                <p>基于强大的知识库，提供准确、即时的答案，解决您的各种疑问。</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-clock"></i>
+                <h3>全天候服务</h3>
+                <p>24小时不间断服务，随时随地为您提供专业支持与解答。</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>安全可靠</h3>
+                <p>企业级安全防护，保障您的数据隐私和对话安全。</p>
+            </div>
+        </div>
         
         <div class="chat-container">
             <div class="iframe-wrapper">
                 <iframe
-                    src="http://172.18.82.40/chat/share?shared_id=783773127c0211f08d8d6233cd83c456&from=chat&auth=llOGJiZDk2N2NlMDExZjBiYmMyNjIzM2"
+                    src="http://172.18.5.2:8081/chat/share?shared_id=51c097c663a811f08145ce2077b3b8e6&from=chat&auth=MyZTRiYTU0N2MxNjExZjA4MDk4NDZkOG"
                 ></iframe>
             </div>
         </div>
         
+        <div class="instructions">
+            <h2><i class="fas fa-info-circle"></i> 使用指南</h2>
+            <ul>
+                <li>
+                    <i class="fas fa-comment"></i>
+                    <div>在聊天框中输入您的问题，例如："如何重置密码？" 或 "产品有哪些功能？"</div>
+                </li>
+                <li>
+                    <i class="fas fa-history"></i>
+                    <div>系统会记录您的对话历史，方便您随时回溯之前的交流内容</div>
+                </li>
+                <li>
+                    <i class="fas fa-thumbs-up"></i>
+                    <div>如果回答对您有帮助，请点击"赞"按钮帮助我们改进服务质量</div>
+                </li>
+                <li>
+                    <i class="fas fa-redo"></i>
+                    <div>遇到回答不准确的情况，您可以重新提问或要求进一步解释</div>
+                </li>
+            </ul>
+        </div>
+        
         <footer>
-            <p>RAGFlow 聊天助手嵌入演示 | 免费测试页面</p>
+            <div class="footer-content">
+                <div class="contact">
+                    <p><i class="fas fa-envelope"></i> 技术支持: support@ragflow.com</p>
+                    <p><i class="fas fa-phone"></i> 客服热线: 400-123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 公司地址: 北京市海淀区科技园区88号</p>
+                </div>
+                <div class="copyright">
+                    <p>© 2023 RAGFlow 智能助手 | 让沟通更智能</p>
+                    <p>基于人工智能技术的专业客服解决方案</p>
+                </div>
+            </div>
         </footer>
     </div>
 </body>
