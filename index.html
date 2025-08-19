@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAGFlow 聊天助手测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #4b5563;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .chat-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .iframe-wrapper {
+            width: 100%;
+            height: 600px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .instructions {
+            background-color: #f9fafb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        
+        .instructions h2 {
+            color: #2563eb;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .iframe-wrapper {
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .iframe-wrapper {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RAGFlow 聊天助手测试</h1>
+            <p class="subtitle">此页面演示了如何将 RAGFlow 聊天助手嵌入到网站中</p>
+        </header>
+        
+        <div class="instructions">
+            <h2>使用说明</h2>
+            <ul>
+                <li>直接在下方聊天窗口提问，测试助手功能</li>
+                <li>此页面已响应式设计，可在手机、平板和电脑上使用</li>
+                <li>将此 HTML 文件保存后直接在浏览器打开即可使用</li>
+            </ul>
+        </div>
+        
+        <div class="chat-container">
+            <div class="iframe-wrapper">
+                <!-- 您提供的 iframe 代码 -->
+                <iframe
+                    src="http://172.18.82.40/chat/share?shared_id=783773127c0211f08d8d6233cd83c456&from=chat&auth=llOGJiZDk2N2NlMDExZjBiYmMyNjIzM2"
+                    style="width: 100%; height: 100%;"
+                    frameborder="0"
+                >
+                </iframe>
+            </div>
+        </div>
+        
+        <footer>
+            <p>RAGFlow 聊天助手嵌入演示 | 免费测试页面</p>
+        </footer>
+    </div>
+</body>
+</html>
